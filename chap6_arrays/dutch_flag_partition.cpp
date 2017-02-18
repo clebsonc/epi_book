@@ -11,13 +11,13 @@ void swap(std::vector<int> & array, int i, int j){
 void dutchFlagPartition(std::vector<int> & array, const int pivot){
   int smaller = 0;
   for(int i = 0; i < array.size(); i++){
-    if(array.at(i) < pivot && i != smaller){
+    if(array.at(i) < pivot){
       swap(array, i, smaller);
       smaller++;
     }
   }
   int greater = array.size()-1;
-  for(int i = greater; i > smaller; i--){
+  for(int i = greater; i >=0; i--){
     if(array.at(i) > pivot){
       swap(array, i, greater);
       greater--;
