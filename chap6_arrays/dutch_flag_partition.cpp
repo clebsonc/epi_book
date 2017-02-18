@@ -27,8 +27,8 @@ void dutchFlagPartition(std::vector<int> & array, const int pivot){
 
 
 int main(){
-  std::vector<int> elements = {3, 4, 2, 8, 1 , 5, 3, 2, 5, 3, 2, 4, 6, 10};
-  dutchFlagPartition(elements, 5);
+  std::vector<int> elements = {10, 4, 2, 8, 1 , 5, 3, 2, 5, 3, 2, 4, 6, 1};
+  dutchFlagPartition(elements, 3);
   for(int v : elements)
     std::cout << v << " ";
   std::cout << "\n";
