@@ -1,9 +1,6 @@
 #include <iostream>
 #include <vector>
 
-/**
-* Exercise 17.1
-*/
 
 
 void print2DVector(const std::vector<std::vector<int>> & map){
