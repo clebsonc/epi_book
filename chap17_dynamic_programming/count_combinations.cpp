@@ -49,7 +49,7 @@ int numCombinationFinalScore(const int score, const std::vector<int> & values){
 
 
 int main(){
-  std::cout << "Computed: [n, " << numCombinationFinalScore(5, std::vector<int>{1, 2, 3}) << "]" <<std::endl;
+  std::cout << "Computed: [n, " << numCombinationFinalScore(10, std::vector<int>{2, 3, 5, 6}) << "]" <<std::endl;
 
 
   return 0;
