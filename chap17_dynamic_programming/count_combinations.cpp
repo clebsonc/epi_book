@@ -1,8 +1,6 @@
 #include <iostream>
 #include <vector>
 
-
-
 void print2DVector(const std::vector<std::vector<int>> & map){
   std::cout << "size: " << map.size() << " " << map.at(0).size() << std::endl;
   for(int r = 0; r < map.size(); r++){
@@ -12,9 +10,6 @@ void print2DVector(const std::vector<std::vector<int>> & map){
     std::cout << std::endl;
   }
 }
-
-
-
 
 int compute_score(const int score, std::vector<std::vector<int>> & map, 
     int index, const std::vector<int> & values){
@@ -34,6 +29,20 @@ int compute_score(const int score, std::vector<std::vector<int>> & map,
   return map.at(score).at(index);
 }
 
+int DPMemoMaximumScore(std::vector<std::vector<int>> & memo, int n, 
+                        const std::vector<int> & values, int index){
+  if (n < 0) return 0;
+  else if (memo.at(n).at(index) == -1){
+    int biggerValue = DPMemoMaximumScore(memo, n-values.at(index), values, index);
+    if (index == 0){
+      memo.at(n).at(index) = biggerValue;
+    } else {
+      int smallerValue = DPMemoMaximumScore(memo, n, values, index-1);
+      memo.at(n).at(index) = biggerValue + smallerValue;
+    }
+  }
+  return memo.at(n).at(index);
+}
 
 
 int numCombinationFinalScore(const int score, const std::vector<int> & values){
@@ -47,9 +56,21 @@ int numCombinationFinalScore(const int score, const std::vector<int> & values){
   return map.at(score).at(values.size()-1);
 }
 
+int numCombinationFinalScore1(const int score, const std::vector<int> & values){
+  std::vector<std::vector<int>> memo(score+1, std::vector<int>(values.size(), -1));
+  for(int i = 0; i < values.size(); i++){
+    memo.at(0).at(i) = 1;
+  }
+  DPMemoMaximumScore(memo, score, values, values.size()-1);
+  print2DVector(memo);
+
+  return memo.at(score).at(values.size()-1);
+}
 
 int main(){
-  std::cout << "Computed: [n, " << numCombinationFinalScore(10, std::vector<int>{2, 3, 5, 6}) << "]" <<std::endl;
+  std::cout << "Computed: [n, " << numCombinationFinalScore(4, std::vector<int>{1, 2, 3}) << "]" <<std::endl;
+  std::cout << "Second Approach" << std::endl;
+  std::cout << "Computed: [n, " << numCombinationFinalScore1(4, std::vector<int>{1, 2, 3}) << "]" <<std::endl;
 
 
   return 0;
